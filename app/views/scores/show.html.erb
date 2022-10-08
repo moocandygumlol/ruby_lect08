@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<% l = @x%>
+
+<%= render @score %>
+
+<%url = ""%>
+<% if @x == "1"%>
+  <%url = "/student/" + @y + "/edit_score"%>
+<%else%>
+  <%url = scores_path%>
+<%end%>
+
+<div>
+  <%= link_to "Edit this score", edit_score_path(@score) , back: @x%> |
+  <%= link_to "Back to scores", url %>
+
+  <%= button_to "Destroy this score", @score, method: :delete %>
+</div>

@@ -1,0 +1,38 @@
+<%if @student != nil%>
+    <%x = 0%>
+    <%n = 0%>
+    <%y = "none"%>
+    <% mn = 0 %>
+    <%@student.score.each do |s|%>
+        <%x += s.point%>    
+        <%n += 1%>
+        <%if mn < s.point%>
+            <% y = s.subject%>
+            <% mn = s.point%>
+        <%end%>
+    <%end%>
+    <div>average score : <%= x/n %></div>
+    <div>Subject max score : <%= y %></div>
+    <table>
+        <tr>
+            <td>subject</td>
+            <td>point</td>
+            <td>grade</td>
+            <td>edit</td>
+            <td>delete</td>
+        </tr>
+    <%@student.score.each do |s|%>
+        <tr>
+            <td><%=s.subject%></td>
+            <td><%=s.point%></td>
+            <td><%=s.grade%></td>
+            <td><%=link_to "edit", controller: "scores", action: "edit", id: s.id , stu_id: @student.id, data_sub: s.subject, data_point: s.point, data_grade: s.grade, back: 1%></td>
+            <td><%=link_to "delete", controller: "st_score", action: "delete", id: s.id , stu_id: @student.id%><td>
+        </tr>
+    <%end%>
+        <tr>
+            <td><%=link_to "add", controller: "scores", action: "new", stu_id: @student.id, back: 1%></td>
+        </tr>
+<%else%>
+    <p>this student_id is not found</p>
+<%end%>
